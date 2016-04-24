@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Title</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="../css/style.css">
+  </head>
+  <body>
+    <textarea id="source">
+
+      class: center, middle
+
+      # Javascript勉強会
+      ## 第一回目(04/25)
+
+      ---
+      # Agenda
+
+      1. 型の話
+      2. 
+      3. ...
+
+      ---
+      # 型の種類
+      - ####プリミティブ型
+      - 数値(number)
+      - 文字列(string)
+      - 論理型(boolean)
+      - undefined
+      - null
+      - ####オブジェクト型
+      - object(object, function, array)
+
+      ---
+      # プリミティブ型
+      ```javascript
+      > typeof 1
+      'number'
+      > typeof 'javascript'
+      'string'
+      > typeof true
+      'boolean'
+      > typeof undefined
+      'undefined'
+      > typeof null
+      'object'
+      ```
+      nullとundefinedは特殊な型
+
+      ---
+      # undefined
+      - 定義されたグローバルな変数
+      - 読み込み専用
+      - ES5から読み込み専用となった
+      - 初期化してない変数の値
+      - 存在しないobjectへのアクセス
+      - 存在しない配列要素へのアクセス
+      - 戻り値のない関数が返す値
+      - 関数の呼び出し時の引数値
+      ```javascript
+      > let b
+      undefined
+      > obj = {}
+      {}
+      > obj.a
+      undefined
+      > arr = []
+      []
+      > arr[0]
+      undefined
+      > fn = (a) => {console.log(`argument: ${a}`)}
+      [Function]
+      > fn()
+      argument: undefined
+      undefined
+      ```
+
+      ---
+      # null
+      他の言語のnullやnilと等価の意味を持ちます  
+      該当した値がない場合にnullを使います  
+      つまり、返すものがない場合に意図的にnullを用います  
+
+      ---
+      # 比較方法
+      ```javascript
+      > a = undefined
+      undefined
+      > b = null
+      null
+      > a == b
+      true
+      > a === b
+      false
+      ```
+      厳密等価演算子で比較しなければ両者ともtrueを返す  
+      なので区別せずに判断したい場合
+      ```javascript
+      > a = undefined
+      undefined
+      > if (a == null) console.log('ok')
+      ok
+      ```
+
+      ---
+      # undefined と null のまとめ
+      #### undefinedはシステムが予期してない場合に使われる  
+      #### nullはプログラムレベルで予定していた場合に使われる  
+
+      なので関数に値を渡したり、値を設定したい場合は*null*を使ったほうがよい
+
+      ---
+      # オブジェクト型
+      - object
+        - function
+        - array
+
+      ```javascript
+      > obj = {}
+      {}
+      > fn = () => {}
+      [Function]
+      > arr = []
+      []
+      > typeof obj
+      'object'
+      > typeof fn
+      'function'
+      > typeof arr
+      'object'
+      ```
+      functionはtypeofでfunctionと帰ってくるがobjectである
+      ```javascript
+      > fn.test = 'test'
+      'test'
+      > fn
+      { [Function] test: 'test' }
+      ```
+
+      ---
+      # オブジェクト型の注意点
+      変数のコピー時には*アドレス*がコピーされる  
+      なのでオブジェクト型は*参照型*とも呼ばれる
+      ```javascript
+      > obj1 = {test: 'test1'}
+      { test: 'test1' }
+      > obj2 = obj1
+      { test: 'test1' }
+      > obj2
+      { test: 'test1' }
+      > obj2.test = 'test2'
+      'test2'
+      > obj1.test
+      'test2'
+      ```
+      コピーをする方法
+      ```javascript
+      - JSON.parse(JSON.stringify(obj));
+      - Object.assign
+      - jQueryのextend
+      - lodashのclone
+      ```
+
+      ---
+      # 配列かどうかの判定
+      ```javascript
+      > arr = []
+      []
+      > typeof arr
+      'object'
+      > arr instanceof Array
+      true
+      > Array.isArray(arr)
+      true
+      > Object.prototype.toString.call(arr)
+      '[object Array]'
+      ```
+      `Array.isArray()` を使うのが一番ベストだと思います  
+      (IE8以下をサポートしないなら)
+
+      ---
+      # Wrapper Objects
+      プリミティブ型でもオブジェクトのようにプロパティへ参照できる仕組み  
+      プリミティブ型がプロパティへ参照した際に生成される一時的なオブジェクト
+
+      nullとundefinedには適用されません
+      ```javascript
+      > str = 'string'
+      'string'
+      > str.length
+      6
+      ```
+      あくまで読み出し専用なため独自定義はできません  
+      明示的に生成する場合(基本的に使いません)
+      ```javascript
+      > str = new String('hoge')
+      [String: 'hoge']
+      > num = new Number(1)
+      [Number: 1]
+      > bool = new Boolean(true)
+      [Boolean: true]
+      > typeof str
+      'object'
+      ```
+      もちろんtypeofで見るとobjectになっている
+
+      ---
+      # 比較
+      ```javascript
+      > num = 1
+      1
+      > str = '1'
+      '1'
+      > num == str
+      true
+      > num === str
+      false
+      > obj1 = {test: 'hoge'};
+      { test: 'hoge' }
+      > obj2 = {test: 'hoge'};
+      { test: 'hoge' }
+      > obj1 == obj2
+      false
+      > obj1 === obj2
+      false
+      ```
+      理由がない限り型チェックをする厳密等価演算子(`===`)を使いましょう  
+      オブジェクト型は値では比較しません
+
+      ```javascript
+      > obj1 = {}
+      {}
+      > obj2 = obj1
+      {}
+      > obj1 === obj2
+      true
+      ```
+      上記のように両者とも同じオブジェクトを参照している時に同一と判断されます
+
+      ---
+      # falseになる値
+      ```javascript
+      > !!0
+      false
+      > !!-0
+      false
+      > !!NaN <-- NaNはfalseだがInfinityはtrue
+      false
+      > !!'' <-- 空文字の時はfalse
+      false
+      > !!undefined
+      false
+      > !!null
+      false
+      ```
+      `0, -0, NaN, '', undefined, null` の6つがfalseになる値となる
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>
