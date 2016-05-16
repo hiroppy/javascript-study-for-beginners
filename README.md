@@ -1,7 +1,7 @@
 ## js for beginners
 
 - [x] types
-- [ ] this
+- [x] this
 - [ ] prototype
 - [ ] function
 - [ ] call, apply
