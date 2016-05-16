@@ -163,31 +163,35 @@
       ES2015から入った無名関数の糖衣構文です  
       しかし全くの糖衣構文ではないため、使いどころは考える必要があります
 
-      thisでの違いはアロー演算子は関数呼び出し時によってthisの値は*決まらず*に、定義時にthisの値が決まります  
-      #### つまり、アロー演算子を使うことにより定義時のthisを束縛することが可能になります
-      なので呼び出し元のthisであることが保証されたことになります
+      主な違う点
+      - thisの扱い
+      - arguments objectを持たない
+      - コンストラクタにならない
 
-      ```javascript
-      const obj = {};
-
-      obj.say = function() {
-        console.log(this);
-        // { say: [Function], test: [Function] }
-      }
-
-      obj.test = () => {
-        console.log(this);
-        // {}
-      }
-      ```
+      _今回はthisの話なので他は省略します_
 
       ---
       ## アロー演算子2
 
-      # wip
-      _今回はthisの話なので省略しますが、違いとして arguments objectを持たなかったり、コンストラクタにならないと違いはあります_
+      thisでの違いはアロー演算子は関数呼び出し時によってthisの値は*決まらず*に、定義時にthisの値が決まります  
 
-      今の時代、基本的にアロー演算子を使って書きますが、thisを使う場合とarguments objectを使う場合は注意して使うべきでです
+      ```javascript
+      const obj = {
+        say: function() {
+          console.log(this);
+          // { say: [Function], test: [Function] }
+        }
+        test: () => {
+          console.log(this);
+          // {}
+        }
+      };
+      ```
+
+      #### つまり、アロー演算子を使うことにより定義時のthisを束縛することが可能になります
+      なので呼び出し元のthisであることが保証されたことになります
+
+      thisを使う場合とarguments objectを使う場合は注意して使うべきでです
 
       ---
       ## コンストラクタ呼び出し
