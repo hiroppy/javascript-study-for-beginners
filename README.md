@@ -2,7 +2,7 @@
 
 - [x] types
 - [x] this
+  - [x] call, apply
 - [ ] prototype
 - [ ] function
-- [ ] call, apply
 - [ ] ES2015
