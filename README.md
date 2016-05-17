@@ -9,7 +9,7 @@
 
 ## 目次(予定)
 - [x] types
-- [ ] this
+- [x] this
 - [ ] prototype
 - [ ] function
 - [ ] call, apply
