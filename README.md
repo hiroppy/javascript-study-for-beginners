@@ -11,8 +11,7 @@
 - [x] types
 - [x] this
 - [ ] prototype
-- [ ] function
-- [ ] call, apply
+- [ ] function, Closures
 - [ ] ES2015
 
 ## リポジトリ
