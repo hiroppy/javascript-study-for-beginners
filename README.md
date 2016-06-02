@@ -10,7 +10,7 @@
 ## 目次(予定)
 - [x] types
 - [x] this
-- [ ] prototype
+- [x] prototype
 - [ ] function, Closures
 - [ ] ES2015
 
