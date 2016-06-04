@@ -151,7 +151,7 @@ hello.__proto__.hasOwnProperty('text') // true
 ---
 ## {#prototype-3} Object.prototype
 Object オブジェクトはすべてのオブジェクトの元であり、特殊な存在です。  
-
+`Object` は関数オブジェクトなため`prototype`を持ちます。  
 `Object.prototype`の`__proto__`はnullです。
 ```javascript
 Object.prototype.__proto__
