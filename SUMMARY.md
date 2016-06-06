@@ -1,5 +1,6 @@
 # Summary
 
-- [型・値](types/types.md)
+- [types](types/types.md)
 - [this](this/this.md)
 - [prototype](prototype/prototype.md)
+- [function](function/function.md)
